@@ -14,14 +14,14 @@ config :base64_example, Base64Example.Repo,
 
 config :waffle,
   storage: Waffle.Storage.S3,
-  bucket: System.get_env("OCCGEN_AWS_S3_BUCKET"),
-  asset_host: System.get_env("OCCGEN_ASSET_HOST", "")
+  bucket: System.get_env("AWS_S3_BUCKET"),
+  asset_host: System.get_env("ASSET_HOST", "")
 
 config :ex_aws,
   json_codec: Jason,
-  access_key_id: System.get_env("OCCGEN_AWS_ACCESS_KEY_ID"),
-  secret_access_key: System.get_env("OCCGEN_AWS_SECRET_ACCESS_KEY"),
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
   s3: [
-    scheme: System.get_env("OCCGEN_AWS_SCHEME", "https://")
+    scheme: System.get_env("AWS_SCHEME", "https://")
   ],
-  region: System.get_env("OCCGEN_AWS_REGION", "us-west-1")
+  region: System.get_env("AWS_REGION", "us-west-1")

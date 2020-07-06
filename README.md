@@ -1,6 +1,8 @@
 # Base64Example
 
-**TODO: Add description**
+```elixir
+  Base64Example.Organization.create_organization
+```
 
 ## Installation
 

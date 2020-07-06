@@ -8,6 +8,8 @@ defmodule Base64Example.Organization do
 
   require Logger
 
+  @image_name "phoenix.png"
+
   schema "organizations" do
     field(:logo, Base64Example.Logo.Type)
 
@@ -17,7 +19,7 @@ defmodule Base64Example.Organization do
   def create_organization(attrs \\ nil) do
     Repo.start_link()
 
-    attrs = attrs || %{logo: %{filename: "phoenix.png", binary: base64_decoded_image()}}
+    attrs = attrs || %{logo: %{filename: @image_name, binary: base64_decoded_image()}}
 
     {_, org} =
       %__MODULE__{}
@@ -32,18 +34,20 @@ defmodule Base64Example.Organization do
       {:ok, status, _, _} = reattach_image_to_organization(org)
       if status == 200, do: Logger.warn("Successs image upload")
     end
+
+    Logo.url({org.logo, org})
   end
 
   def reattach_image_to_organization(org) do
     Repo.start_link()
 
-    Logo.store({%{filename: "phoenix.png", binary: base64_decoded_image()}, org})
+    Logo.store({%{filename: @image_name, binary: base64_decoded_image()}, org})
 
     Logo.url({org.logo, org}) |> :hackney.get()
   end
 
   defp base64_decoded_image do
-    (File.cwd!() <> "/phoenix.png") |> File.read!() |> Base.encode64() |> Base.decode64!()
+    (File.cwd!() <> "/" <> @image_name) |> File.read!() |> Base.encode64() |> Base.decode64!()
   end
 
   def attachments_changeset(organization, attrs) do

@@ -1,4 +1,4 @@
-defmodule OccGen.Repo.Migrations.CreateOrganizations do
+defmodule Base64Example.Repo.Migrations.CreateOrganizations do
   use Ecto.Migration
 
   def change do
