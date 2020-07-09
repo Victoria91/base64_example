@@ -15,7 +15,7 @@ config :base64_example, Base64Example.Repo,
 config :waffle,
   storage: Waffle.Storage.S3,
   bucket: System.get_env("AWS_S3_BUCKET"),
-  asset_host: System.get_env("ASSET_HOST", "")
+  asset_host: System.get_env("AWS_ASSET_HOST", "")
 
 config :ex_aws,
   json_codec: Jason,

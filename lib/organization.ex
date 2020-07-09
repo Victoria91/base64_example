@@ -28,7 +28,7 @@ defmodule Base64Example.Organization do
 
     {:ok, status, _, _} = Logo.url({org.logo, org}) |> :hackney.get()
 
-    if status == 404 do
+    if status != 200 do
       Logger.error("Image is not uploaded! Uploading via .store ...")
 
       {:ok, status, _, _} = reattach_image_to_organization(org)
